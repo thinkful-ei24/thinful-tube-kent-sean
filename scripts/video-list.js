@@ -16,10 +16,10 @@ const videoList = (function() {
 
   const generateVideoItemHtml = function(video) {
     return `
-        <li>
-            <h2>${video.title}></h2>
-            <a href="https://www.youtube.com/watch?v=${video.id}" data-lity><img src=${video.thumbnail}></a>
-            <a href="https://www.youtube.com/channel/${video.channelId}">${video.channelTitle}</a>
+        <li class="video-result">
+            <h2 class="vide-title">${video.title}></h2>
+            <a href="https://www.youtube.com/watch?v=${video.id}" class="video-thumbnail" data-lity><img src=${video.thumbnail}></a>
+            <a href="https://www.youtube.com/channel/${video.channelId}" class="channel-link">${video.channelTitle}</a>
         </li>`;
   };
 

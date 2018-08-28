@@ -10,3 +10,30 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.results {
+    list-style: none;
+}
+
+.video-result {
+    display: block;
+}
+
+.video-title, .video-thumbnail, .channel-link {
+    display: inline-block;
+    width: 20%;
+}
+
+.video-title {
+    clear: both;
+}
+
+.video-thumbnail {
+    display: float;
+    float: left;
+
+}
+
+.channel-link {
+    clear: both;
+    color: red;
+}

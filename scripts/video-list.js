@@ -37,17 +37,30 @@ const videoList = (function() {
       let searchTerm = field.val();
       field.val('');
       
-      api.fetchVideos(searchTerm, decorateResponse);
       api.fetchVideos(searchTerm, response => {
         let decoratedVideos = decorateResponse(response);
         store.setVideos(decoratedVideos);
+        store.setPageTokens(response);
         render();
       });
     });
   };
 
+  const handlePageControls = function() {
+    $('.prev-button').click(function(event) {
+      console.log(store.prevPageToken);
+      console.log("prev button clicked");
+    });
+    
+    $('.next-button').click(function(event) {
+      console.log(store.nextPageToken);
+      console.log("next button clicked");
+    });
+  };
+
   const bindEventListeners = function() {
     handleFormSubmit();
+    handlePageControls();
   };
 
   return {

@@ -15,25 +15,24 @@ body {
 }
 
 .video-result {
-    display: block;
+    clear: both;
 }
 
+
 .video-title, .video-thumbnail, .channel-link {
-    display: inline-block;
-    width: 20%;
+  display: inline-block;
+  
 }
 
 .video-title {
-    clear: both;
 }
 
 .video-thumbnail {
     display: float;
     float: left;
-
 }
 
 .channel-link {
-    clear: both;
+
     color: red;
 }

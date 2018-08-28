@@ -1,4 +1,6 @@
-const API_KEY = 'AIzaSyCs5QJ5fnvayDdaIhZzwTKORJ7JN-TUOvc';
+/* globals store */
+
+
 
 /*
   We want our store to hold an array of "decorated" video objects - i.e. objects that
@@ -13,13 +15,7 @@ const API_KEY = 'AIzaSyCs5QJ5fnvayDdaIhZzwTKORJ7JN-TUOvc';
     thumbnail: 'https://img.youtube.com/some/thumbnail.jpg'
   }
 */
-const store = {
-  videos: []
-};
 
-// TASK: Add the Youtube Search API Base URL here:
-// Documentation is here: https://developers.google.com/youtube/v3/docs/search/list#usage
-const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
 
 /**
  * @function fetchVideos
@@ -35,14 +31,6 @@ const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
 //    as the last argument
 //
 // TEST IT! Execute this function and console log the results inside the callback.
-const fetchVideos = function(searchTerm, callback) {
-  const query = {
-    q: `${searchTerm}`,
-    part: 'snippet',
-    key: `${API_KEY}`
-  }
-  $.getJSON(BASE_URL, query, callback);
-};
 
 /**
  * @function decorateResponse
@@ -68,7 +56,7 @@ const decorateResponse = function(response) {
     };
   });
 
-  addVideosToStore(decoratedVideos);
+  store.setVideos(decoratedVideos);
   render();
 };
 
@@ -86,24 +74,7 @@ const generateVideoItemHtml = function(video) {
     <img src=${video.thumbnail}>
     <a src="#">${video.title}</a>
   </li>`;
-  // return `<li>
-  //   <img src="https://i.ytimg.com/vi/seHty47QDtk/mqdefault.jpg">
-  //   <a src="#">India On Top as Buttler Hits Maiden Test Ton | England v India 3rd Test Day 4 2018 - Highlights</a>
-  // </li>`;
 };
-
-/**
- * @function addVideosToStore
- * Store modification function to set decorated video objects
- * @param {array} videos - decorated video objects
- */
-// TASK:
-// 1. Set the received array as the value held in store.videos
-// TEST IT!
-const addVideosToStore = function(videos) {
-  store.videos = videos;
-};
-
 
 /**
  * @function render
@@ -143,7 +114,7 @@ const handleFormSubmit = function() {
     let searchTerm = field.val();
     field.val("");
 
-    fetchVideos(searchTerm, decorateResponse);
+    api.fetchVideos(searchTerm, decorateResponse);
   });
 };
 

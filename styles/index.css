@@ -41,23 +41,23 @@ body {
 }
 
 .channel-link {
-    margin-left: 15px;
     color: red;
 }
 
 @media screen and (min-width: 1024px) {
     .video-result {
         display: flex;
+        background-color: lightgrey
     }
 
     .video-thumbnail {
-        flex-basis: 300px;
+        flex-basis: 320px;
         flex-shrink: 0;
     }
 
     .video-info {
         text-align: left;
-        padding-left: 10px;
+        padding-left: 20px;
         flex-grow: 1;
     }
 

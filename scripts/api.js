@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 const api = (function() {
   const API_KEY = 'AIzaSyCs5QJ5fnvayDdaIhZzwTKORJ7JN-TUOvc';
   const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
@@ -7,7 +8,7 @@ const api = (function() {
       q: `${searchTerm}`,
       part: 'snippet',
       key: `${API_KEY}`
-    }
+    };
     $.getJSON(BASE_URL, query, callback);
   };
   

@@ -1,4 +1,4 @@
-/* globals store */
+/* globals videoList */
 
 // When DOM is ready:
 $(function () {

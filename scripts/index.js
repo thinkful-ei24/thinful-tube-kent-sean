@@ -1,4 +1,4 @@
-const API_KEY = 'YOUR_KEY_HERE';
+const API_KEY = 'AIzaSyCs5QJ5fnvayDdaIhZzwTKORJ7JN-TUOvc';
 
 /*
   We want our store to hold an array of "decorated" video objects - i.e. objects that
@@ -19,7 +19,7 @@ const store = {
 
 // TASK: Add the Youtube Search API Base URL here:
 // Documentation is here: https://developers.google.com/youtube/v3/docs/search/list#usage
-const BASE_URL = '';
+const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
 
 /**
  * @function fetchVideos

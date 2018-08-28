@@ -17,11 +17,10 @@ const videoList = (function() {
   const generateVideoItemHtml = function(video) {
     return `
         <li>
-            <a href="https://www.youtube.com/watch?v=${video.id}"><img src=${video.thumbnail}></a>
-            <a href="#">${video.title}</a>
+            <iframe width="966" height="543" src="https://www.youtube.com/embed/${video.id}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <a href="${video.thumbnail}" data-lightbox="${video.title}"><img src=${video.thumbnail}></a>
+            <a href="https://www.youtube.com/watch?v=${video.id}">${video.title}</a>
             <a href="https://www.youtube.com/channel/${video.channelId}">${video.channelTitle}</a>
-            
-            <a href="${video.thumbnail}" data-lightbox="image-1" data-title="My caption">Image #1</a>
         </li>`;
   };
 

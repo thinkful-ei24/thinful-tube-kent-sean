@@ -41,7 +41,7 @@ const fetchVideos = function(searchTerm, callback) {
     part: 'snippet',
     key: `${API_KEY}`
   }
-  let response = $.getJSON(BASE_URL, query, callback);
+  $.getJSON(BASE_URL, query, callback);
 };
 
 /**
@@ -60,7 +60,13 @@ const fetchVideos = function(searchTerm, callback) {
 // TEST IT! Grab an example API response and send it into the function - make sure
 // you get back the object you want.
 const decorateResponse = function(response) {
-
+  return response.items.map(video => {
+    return {
+      id: video.id.videoId,
+      title:video.snippet.title,
+      thumbnail: video.snippet.thumbnails.medium.url
+    };
+  });
 };
 
 /**
@@ -73,7 +79,14 @@ const decorateResponse = function(response) {
 // 1. Using the decorated object, return an HTML string containing all the expected
 // TEST IT!
 const generateVideoItemHtml = function(video) {
-
+  // return `<li>
+  //   <img src=${video.thumbnail}>
+  //   <a src="#">${video.title}</a>
+  // </li>`
+  return `<li>
+    <img src="https://i.ytimg.com/vi/seHty47QDtk/mqdefault.jpg">
+    <a src="#">India On Top as Buttler Hits Maiden Test Ton | England v India 3rd Test Day 4 2018 - Highlights</a>
+  </li>`;
 };
 
 /**
@@ -98,7 +111,8 @@ const addVideosToStore = function(videos) {
 // 2. Add this array of DOM elements to the appropriate DOM element
 // TEST IT!
 const render = function() {
-
+  console.log('running');
+  $('.results').html(generateVideoItemHtml());
 };
 
 /**
@@ -125,7 +139,9 @@ const handleFormSubmit = function() {
     field.val("");
     // TODO add callback
     console.log(searchTerm);
-    fetchVideos(searchTerm, function(){});
+    fetchVideos(searchTerm, decorateResponse);
+
+    render();
   });
 };
 

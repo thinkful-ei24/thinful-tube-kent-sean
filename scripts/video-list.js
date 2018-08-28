@@ -20,6 +20,8 @@ const videoList = (function() {
             <a href="https://www.youtube.com/watch?v=${video.id}"><img src=${video.thumbnail}></a>
             <a href="#">${video.title}</a>
             <a href="https://www.youtube.com/channel/${video.channelId}">${video.channelTitle}</a>
+            
+            <a href="${video.thumbnail}" data-lightbox="image-1" data-title="My caption">Image #1</a>
         </li>`;
   };
 
@@ -34,10 +36,10 @@ const videoList = (function() {
     $('form').submit(function(event) {
       event.preventDefault();
       const field = $('#search-term');
-      let searchTerm = field.val();
+      store.searchTerm = field.val();
       field.val('');
       
-      api.fetchVideos(searchTerm, response => {
+      api.fetchVideos(store.searchTerm, '', response => {
         let decoratedVideos = decorateResponse(response);
         store.setVideos(decoratedVideos);
         store.setPageTokens(response);
@@ -48,13 +50,21 @@ const videoList = (function() {
 
   const handlePageControls = function() {
     $('.prev-button').click(function(event) {
-      console.log(store.prevPageToken);
-      console.log("prev button clicked");
+      api.fetchVideos(store.searchTerm, store.prevPageToken, response => {
+        let decoratedVideos = decorateResponse(response);
+        store.setVideos(decoratedVideos);
+        store.setPageTokens(response);
+        render();
+      });
     });
     
     $('.next-button').click(function(event) {
-      console.log(store.nextPageToken);
-      console.log("next button clicked");
+      api.fetchVideos(store.searchTerm, store.nextPageToken, response => {
+        let decoratedVideos = decorateResponse(response);
+        store.setVideos(decoratedVideos);
+        store.setPageTokens(response);
+        render();
+      });
     });
   };
 

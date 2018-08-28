@@ -3,6 +3,7 @@ const store = (function() {
   const videos = [];
   let prevPageToken = '';
   let nextPageToken = '';
+  let searchTerm = '';
 
   const setVideos = function(videos) {
     this.videos = videos;
@@ -11,13 +12,14 @@ const store = (function() {
   const setPageTokens = function(response) {
     this.prevPageToken = response.prevPageToken;
     this.nextPageToken = response.nextPageToken;
-  }
+  };
 
   return {
     videos,
     setVideos,
     prevPageToken,
     nextPageToken,
-    setPageTokens
+    setPageTokens,
+    searchTerm
   };
 }());

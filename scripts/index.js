@@ -36,7 +36,12 @@ const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
 //
 // TEST IT! Execute this function and console log the results inside the callback.
 const fetchVideos = function(searchTerm, callback) {
-
+  const query = {
+    q: `${searchTerm}`,
+    part: 'snippet',
+    key: `${API_KEY}`
+  }
+  let response = $.getJSON(BASE_URL, query, callback);
 };
 
 /**
@@ -113,11 +118,20 @@ const render = function() {
 //   g) Inside the callback, run the `render` function 
 // TEST IT!
 const handleFormSubmit = function() {
-
+  $('form').submit(function(event) {
+    event.preventDefault();
+    const field = $('#search-term');
+    let searchTerm = field.val();
+    field.val("");
+    // TODO add callback
+    console.log(searchTerm);
+    fetchVideos(searchTerm, function(){});
+  });
 };
 
 // When DOM is ready:
 $(function () {
   // TASK:
   // 1. Run `handleFormSubmit` to bind the event listener to the DOM
+  handleFormSubmit();
 });

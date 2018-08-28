@@ -18,7 +18,7 @@ const videoList = (function() {
     return `
         <li class="video-result">
             <a href="https://www.youtube.com/watch?v=${video.id}" class="video-thumbnail" data-lity><img src=${video.thumbnail}></a>
-            <h2 class="vide-title">${video.title}</h2>
+            <h2 class="video-title">${video.title}</h2>
             <a href="https://www.youtube.com/channel/${video.channelId}" class="channel-link">${video.channelTitle}</a>
         </li>`;
   };

@@ -60,13 +60,16 @@ const fetchVideos = function(searchTerm, callback) {
 // TEST IT! Grab an example API response and send it into the function - make sure
 // you get back the object you want.
 const decorateResponse = function(response) {
-  return response.items.map(video => {
+  let decoratedVideos = response.items.map(video => {
     return {
       id: video.id.videoId,
       title:video.snippet.title,
       thumbnail: video.snippet.thumbnails.medium.url
     };
   });
+
+  addVideosToStore(decoratedVideos);
+  render();
 };
 
 /**
@@ -79,14 +82,14 @@ const decorateResponse = function(response) {
 // 1. Using the decorated object, return an HTML string containing all the expected
 // TEST IT!
 const generateVideoItemHtml = function(video) {
-  // return `<li>
-  //   <img src=${video.thumbnail}>
-  //   <a src="#">${video.title}</a>
-  // </li>`
   return `<li>
-    <img src="https://i.ytimg.com/vi/seHty47QDtk/mqdefault.jpg">
-    <a src="#">India On Top as Buttler Hits Maiden Test Ton | England v India 3rd Test Day 4 2018 - Highlights</a>
+    <img src=${video.thumbnail}>
+    <a src="#">${video.title}</a>
   </li>`;
+  // return `<li>
+  //   <img src="https://i.ytimg.com/vi/seHty47QDtk/mqdefault.jpg">
+  //   <a src="#">India On Top as Buttler Hits Maiden Test Ton | England v India 3rd Test Day 4 2018 - Highlights</a>
+  // </li>`;
 };
 
 /**
@@ -98,7 +101,7 @@ const generateVideoItemHtml = function(video) {
 // 1. Set the received array as the value held in store.videos
 // TEST IT!
 const addVideosToStore = function(videos) {
-
+  store.videos = videos;
 };
 
 
@@ -111,8 +114,10 @@ const addVideosToStore = function(videos) {
 // 2. Add this array of DOM elements to the appropriate DOM element
 // TEST IT!
 const render = function() {
-  console.log('running');
-  $('.results').html(generateVideoItemHtml());
+  console.log('running render');
+  let html = store.videos.map(video => generateVideoItemHtml(video)).join('');
+  $('.results').html(html);
+  console.log(store.videos);
 };
 
 /**
@@ -137,11 +142,8 @@ const handleFormSubmit = function() {
     const field = $('#search-term');
     let searchTerm = field.val();
     field.val("");
-    // TODO add callback
-    console.log(searchTerm);
-    fetchVideos(searchTerm, decorateResponse);
 
-    render();
+    fetchVideos(searchTerm, decorateResponse);
   });
 };
 
